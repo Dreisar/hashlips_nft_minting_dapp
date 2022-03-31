@@ -59,14 +59,24 @@ export const TextTitle = styled.p`
 
 export const TextSubTitle = styled.p`
   color: var(--primary-text);
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.6;
 `;
 
 export const TextDescription = styled.p`
   color: var(--primary-text);
-  font-size: 16px;
+  font-size: 19px;
+  font-weight: bold;
   line-height: 1.6;
+`;
+
+export const TextOutBox = styled.p`
+  color: var(--primary-text);
+  font-size: 19px;
+  font-weight: bold;
+  line-height: 1.6;
+  text-shadow: 2px 2px #000000;
+  text-align: center;
 `;
 
 export const StyledClickable = styled.div`

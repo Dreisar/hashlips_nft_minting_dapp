@@ -14,6 +14,7 @@ export const StyledButton = styled.button`
   border: none;
   background-color: var(--secondary);
   padding: 10px;
+  font-family: "fonthatstic";
   font-weight: bold;
   color: var(--secondary-text);
   width: 100px;
@@ -35,7 +36,8 @@ export const StyledRoundButton = styled.button`
   background-color: var(--primary);
   padding: 10px;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 18px;
+  font-weight: bold;
   color: var(--primary-text);
   width: 30px;
   height: 30px;
@@ -99,7 +101,7 @@ function App() {
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [claimingNft, setClaimingNft] = useState(false);
-  const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
+  const [feedback, setFeedback] = useState(`Select the mint amount, then use the button to buy`);
   const [mintAmount, setMintAmount] = useState(1);
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
@@ -121,7 +123,10 @@ function App() {
   });
 
   const claimNFTs = () => {
-    let cost = CONFIG.WEI_COST;
+    let cost = 0;
+    if (Number(data.ownedNumber) > 4) {
+      cost = CONFIG.WEI_COST;
+    }
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
@@ -149,6 +154,7 @@ function App() {
         );
         setClaimingNft(false);
         dispatch(fetchData(blockchain.account));
+        setMintAmount(1)
       });
   };
 
@@ -161,11 +167,22 @@ function App() {
   };
 
   const incrementMintAmount = () => {
-    let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 10) {
-      newMintAmount = 10;
+    if (Number(data.ownedNumber) > 4) {
+      let newMintAmount = Number(mintAmount) + 1;
+      if (newMintAmount > 10) {
+        newMintAmount = 10;
+      }
+      setMintAmount(newMintAmount);
+    } else {
+      let newMintAmount = mintAmount + 1;
+      let ownedNumber = data.ownedNumber;
+      let newOwnedNumber = Number(newMintAmount) + Number(ownedNumber);
+      if (newOwnedNumber > 4) {
+        newMintAmount = 5 - ownedNumber;
+      }
+      setMintAmount(newMintAmount);
     }
-    setMintAmount(newMintAmount);
+
   };
 
   const getData = () => {
@@ -205,7 +222,7 @@ function App() {
         <s.SpacerSmall />
         <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
           <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg alt={"example"} src={"/config/images/example.gif"} />
+            <StyledImg alt={"burb"} src={"/config/images/burb.png"} />
           </s.Container>
           <s.SpacerLarge />
           <s.Container
@@ -260,30 +277,30 @@ function App() {
               </>
             ) : (
               <>
+                {Number(data.ownedNumber) < 5 ? (<s.TextTitle
+                  style={{ textAlign: "center", color: "var(--accent-text)" }}
+                >You can still mint { 5 - data.ownedNumber} SpaceBurbs for free, then you will pay 0.75 Matic for each
+                </s.TextTitle>) : (<s.TextTitle
+                  style={{ textAlign: "center", color: "var(--accent-text)" }}
+                >You have alredy minted minted the free SpaceBurbs, now the price is 0.75 Matic each</s.TextTitle>)}
+                <s.SpacerXSmall />
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
-                  1 {CONFIG.SYMBOL} costs {CONFIG.DISPLAY_COST}{" "}
-                  {CONFIG.NETWORK.SYMBOL}.
+                  (Excluding gas fees)
                 </s.TextTitle>
-                <s.SpacerXSmall />
-                <s.TextDescription
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
-                  Excluding gas fees.
-                </s.TextDescription>
                 <s.SpacerSmall />
                 {blockchain.account === "" ||
-                blockchain.smartContract === null ? (
+                  blockchain.smartContract === null ? (
                   <s.Container ai={"center"} jc={"center"}>
-                    <s.TextDescription
+                    <s.TextTitle
                       style={{
                         textAlign: "center",
                         color: "var(--accent-text)",
                       }}
                     >
                       Connect to the {CONFIG.NETWORK.NAME} network
-                    </s.TextDescription>
+                    </s.TextTitle>
                     <s.SpacerSmall />
                     <StyledButton
                       onClick={(e) => {
@@ -352,16 +369,29 @@ function App() {
                     </s.Container>
                     <s.SpacerSmall />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                      <StyledButton
-                        disabled={claimingNft ? 1 : 0}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          claimNFTs();
-                          getData();
-                        }}
-                      >
-                        {claimingNft ? "BUSY" : "BUY"}
-                      </StyledButton>
+                      {data.ownedNumber > 4 ?
+                        <StyledButton
+                          disabled={claimingNft ? 1 : 0}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            claimNFTs();
+                            getData();
+                          }}
+                        >
+                          {claimingNft ? "BUSY" : "BUY"}
+                        </StyledButton>
+                        :
+                        <StyledButton
+                          disabled={claimingNft ? 1 : 0}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            claimNFTs();
+                            getData();
+                          }}
+                        >
+                          {claimingNft ? "BUSY" : "MINT"}
+                        </StyledButton>
+                      }
                     </s.Container>
                   </>
                 )}
@@ -372,38 +402,22 @@ function App() {
           <s.SpacerLarge />
           <s.Container flex={1} jc={"center"} ai={"center"}>
             <StyledImg
-              alt={"example"}
-              src={"/config/images/example.gif"}
+              alt={"burb"}
+              src={"/config/images/right_burb.png"}
               style={{ transform: "scaleX(-1)" }}
             />
           </s.Container>
         </ResponsiveWrapper>
         <s.SpacerMedium />
         <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
-          <s.TextDescription
-            style={{
-              textAlign: "center",
-              color: "var(--primary-text)",
-            }}
-          >
-            Please make sure you are connected to the right network (
-            {CONFIG.NETWORK.NAME} Mainnet) and the correct address. Please note:
-            Once you make the purchase, you cannot undo this action.
-          </s.TextDescription>
+          <s.TextOutBox>
+            Please make sure you are connected to the {CONFIG.NETWORK.NAME} Network and the correct address.
+            Please note: Once you make the purchase, you cannot undo this action.
+          </s.TextOutBox>
           <s.SpacerSmall />
-          <s.TextDescription
-            style={{
-              textAlign: "center",
-              color: "var(--primary-text)",
-            }}
-          >
-            We have set the gas limit to {CONFIG.GAS_LIMIT} for the contract to
-            successfully mint your NFT. We recommend that you don't lower the
-            gas limit.
-          </s.TextDescription>
         </s.Container>
       </s.Container>
-    </s.Screen>
+    </s.Screen >
   );
 }
 
