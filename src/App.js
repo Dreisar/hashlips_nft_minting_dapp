@@ -222,7 +222,7 @@ function App() {
         <s.SpacerSmall />
         <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
           <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg alt={"burb"} src={"/config/images/burb.png"} />
+            <StyledImg alt={"burb"} src={"/config/images/INFECTED_BURBS.gif"} />
           </s.Container>
           <s.SpacerLarge />
           <s.Container
@@ -403,7 +403,7 @@ function App() {
           <s.Container flex={1} jc={"center"} ai={"center"}>
             <StyledImg
               alt={"burb"}
-              src={"/config/images/right_burb.png"}
+              src={"/config/images/SPACE_BURBS.gif"}
               style={{ transform: "scaleX(-1)" }}
             />
           </s.Container>

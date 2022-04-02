@@ -1,18 +1,18 @@
 {
-  "CONTRACT_ADDRESS": "0x6B319e5C1ae483380C040a2188f17f76F43c433C",
-  "SCAN_LINK": "https://mumbai.polygonscan.com/token/0x6B319e5C1ae483380C040a2188f17f76F43c433C",
+  "CONTRACT_ADDRESS": "0xAe565E7E2Cb8E6361c253708B53fAA0f43951F3b",
+  "SCAN_LINK": "https://polygonscan.com/token/0xAe565E7E2Cb8E6361c253708B53fAA0f43951F3b",
   "NETWORK": {
-    "NAME": "Polygon Testnet",
+    "NAME": "Polygon",
     "SYMBOL": "Matic",
-    "ID": 80001
+    "ID": 137
   },
   "NFT_NAME": "SpaceBurbs",
   "SYMBOL": "brb",
-  "MAX_SUPPLY": 1000,
+  "MAX_SUPPLY": 4200,
   "WEI_COST": 750000000000000000,
   "DISPLAY_COST": 0.00,
   "GAS_LIMIT": 285000,
   "MARKETPLACE": "Opeansea",
-  "MARKETPLACE_LINK": "https://opensea.io/collection/nerdy-coder-clones",
+  "MARKETPLACE_LINK": "https://opensea.io/collection/spaceburbs",
   "SHOW_BACKGROUND": true
 }
