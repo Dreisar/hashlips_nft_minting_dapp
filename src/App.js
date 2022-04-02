@@ -282,7 +282,7 @@ function App() {
                 >You can still mint { 5 - data.ownedNumber} SpaceBurbs for free, then you will pay 0.75 Matic for each
                 </s.TextTitle>) : (<s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >You have alredy minted minted the free SpaceBurbs, now the price is 0.75 Matic each</s.TextTitle>)}
+                >You have alredy minted the free SpaceBurbs, now the price is 0.75 Matic each</s.TextTitle>)}
                 <s.SpacerXSmall />
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
