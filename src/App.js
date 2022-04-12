@@ -279,10 +279,10 @@ function App() {
               <>
                 {Number(data.ownedNumber) < 5 ? (<s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >You can still mint { 5 - data.ownedNumber} SpaceBurbs for free, then you will pay 0.75 Matic for each
+                >You can still mint { 5 - data.ownedNumber} SpaceBurbs for free
                 </s.TextTitle>) : (<s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >You have alredy minted the free SpaceBurbs, now the price is 0.75 Matic each</s.TextTitle>)}
+                >You have already minted the free SpaceBurbs</s.TextTitle>)}
                 <s.SpacerXSmall />
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
@@ -369,18 +369,6 @@ function App() {
                     </s.Container>
                     <s.SpacerSmall />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                      {data.ownedNumber > 4 ?
-                        <StyledButton
-                          disabled={claimingNft ? 1 : 0}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            claimNFTs();
-                            getData();
-                          }}
-                        >
-                          {claimingNft ? "BUSY" : "BUY"}
-                        </StyledButton>
-                        :
                         <StyledButton
                           disabled={claimingNft ? 1 : 0}
                           onClick={(e) => {
@@ -391,7 +379,7 @@ function App() {
                         >
                           {claimingNft ? "BUSY" : "MINT"}
                         </StyledButton>
-                      }
+
                     </s.Container>
                   </>
                 )}
