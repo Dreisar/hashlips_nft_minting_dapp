@@ -369,6 +369,9 @@ function App() {
                     </s.Container>
                     <s.SpacerSmall />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                      {data.ownedNumber > 4 ?
+                          <s.SpacerSmall />
+                        :
                         <StyledButton
                           disabled={claimingNft ? 1 : 0}
                           onClick={(e) => {
