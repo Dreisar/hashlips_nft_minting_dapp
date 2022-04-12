@@ -280,7 +280,7 @@ function App() {
                 {Number(data.ownedNumber) < 5 ? (<s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >You can still mint { 5 - data.ownedNumber} SpaceBurbs for free
-                  (Excluding gas fees)
+                  (Excluding gas feees)
                 </s.TextTitle>) : (<s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >You have already minted the free SpaceBurbs</s.TextTitle>)}
