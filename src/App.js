@@ -101,7 +101,7 @@ function App() {
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [claimingNft, setClaimingNft] = useState(false);
-  const [feedback, setFeedback] = useState(`Select the mint amount, then use the button to buy`);
+  const [feedback, setFeedback] = useState(`Select the mint amount`);
   const [mintAmount, setMintAmount] = useState(1);
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
@@ -279,16 +279,11 @@ function App() {
               <>
                 {Number(data.ownedNumber) < 5 ? (<s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >You can still mint { 5 - data.ownedNumber} SpaceBurbs for free
+                >You can still mint { 5 - data.ownedNumber} SpaceBurbs for free (Excluding gas fees)
                 </s.TextTitle>) : (<s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >You have alredy minted the free SpaceBurbs</s.TextTitle>)}
                 <s.SpacerXSmall />
-                <s.TextTitle
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
-                  (Excluding gas fees)
-                </s.TextTitle>
                 <s.SpacerSmall />
                 {blockchain.account === "" ||
                   blockchain.smartContract === null ? (
