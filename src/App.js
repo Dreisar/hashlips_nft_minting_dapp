@@ -280,14 +280,14 @@ function App() {
                 {Number(data.ownedNumber) < 5 ? (<s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >You can still mint { 5 - data.ownedNumber} SpaceBurbs for free
-                  (Excluding gas feees)
                 </s.TextTitle>) : (<s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >You have already minted the free SpaceBurbs</s.TextTitle>)}
+                >You have alredy minted the free SpaceBurbs</s.TextTitle>)}
                 <s.SpacerXSmall />
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
+                  (Excluding gas fees)
                 </s.TextTitle>
                 <s.SpacerSmall />
                 {blockchain.account === "" ||
@@ -370,7 +370,10 @@ function App() {
                     <s.SpacerSmall />
                     <s.Container ai={"center"} jc={"center"} fd={"row"}>
                       {data.ownedNumber > 4 ?
-                          <s.SpacerSmall />
+                          <s.TextTitle style={{
+                            textAlign: "center",
+                            color: "var(--accent-text)",
+                          }}> thanks for your support! </s.TextTitle>
                         :
                         <StyledButton
                           disabled={claimingNft ? 1 : 0}
@@ -382,7 +385,7 @@ function App() {
                         >
                           {claimingNft ? "BUSY" : "MINT"}
                         </StyledButton>
-
+                      }
                     </s.Container>
                   </>
                 )}
